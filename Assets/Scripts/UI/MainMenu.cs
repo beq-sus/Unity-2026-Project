@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 /// <summary>Main menu actions. Hooked up to the buttons by Tools > Doomspire > Build Main Menu Scene.</summary>
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private string gameSceneName = "Game";
+    [SerializeField] private string gameSceneName = "LevelSelect";
     [SerializeField] private GameObject optionsPanel;
     [SerializeField] private GameObject creditsPanel;
 
