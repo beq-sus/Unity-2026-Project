@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // Подключает кнопки навигации в сцене боя, не меняя саму сцену Game и GameManager:
-//   BackButton (стрелка ←)  -> карта уровней (LevelSelect)
+//   BackButton (стрелка ←)  -> карта уровней (LevelSelect), в том же стиле, что и на карте
 //   MainMenuButton          -> главное меню (MainMenu)
 // Работает автоматически при загрузке сцены Game, ставить в сцену ничего не нужно.
 public static class GameSceneNavigation
@@ -26,11 +26,35 @@ public static class GameSceneNavigation
             foreach (Button button in root.GetComponentsInChildren<Button>(true))
             {
                 if (button.name == "BackButton")
+                {
                     Bind(button, SceneNames.LevelSelect);
+                    RestyleBackButton(button);
+                }
                 else if (button.name == "MainMenuButton")
                     Bind(button, SceneNames.MainMenu);
             }
         }
+    }
+
+    // Делает стрелку в бою такой же глянцевой, как на карте уровней (спрайт из Resources/Doomspire).
+    static void RestyleBackButton(Button button)
+    {
+        Sprite sprite = Resources.Load<Sprite>("Doomspire/BackButton");
+        Image image = button.GetComponent<Image>();
+        if (sprite == null || image == null)
+            return;
+
+        image.sprite = sprite;
+        image.type = Image.Type.Simple;
+        image.color = Color.white;
+        image.preserveAspect = true;
+
+        RectTransform rt = (RectTransform)button.transform;
+        rt.sizeDelta = new Vector2(110f, 108f);
+
+        // Прячем старую текстовую стрелку «←» внутри кнопки — она уже нарисована на спрайте.
+        foreach (Transform child in button.transform)
+            child.gameObject.SetActive(false);
     }
 
     static void Bind(Button button, string sceneName)
