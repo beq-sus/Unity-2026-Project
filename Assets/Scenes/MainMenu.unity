@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37cf4403dd857594cb096d1584224f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
-  gameSceneName: Game
+  gameSceneName: LevelSelect
   optionsPanel: {fileID: 248256165}
   creditsPanel: {fileID: 1924224751}
 --- !u!114 &87905971
